@@ -1,0 +1,68 @@
+.background-radial-gradient {
+    background-image: url("https://get.wallhere.com/photo/landscape-video-games-dark-knight-castle-fire-sword-Dark-Souls-III-Dark-Souls-Gothic-fighting-mythology-midevil-ghost-ship-darkness-screenshot-atmospheric-phenomenon-computer-wallpaper-58894.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+}
+
+.form-control:focus {
+    border-color: #6265e4 !important;
+    box-shadow: 0 0 5px rgba(98, 101, 228, 1) !important;
+}
+
+.bg-glass {
+    backdrop-filter: saturate(200%) blur(25px);
+    background: rgba( 255, 255, 255, 0.60);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.10 );
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #fd6d0d;
+    --bs-btn-border-color: #fd6d0d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #fd6d0d;
+    --bs-btn-hover-border-color: #fd6d0d;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #fd6d0d;
+    --bs-btn-active-border-color: #fd6d0d;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #fd6d0d;
+    --bs-btn-disabled-border-color: #fd6d0d;
+
+    }
+.link-custom {
+    color: orange ;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.customlink:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.customlink:hover {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.customlink:active {
+    color: orange;
+    background-color: transparent;
+
+}
+/*.img-form {
+    filter: invert(58%);
+
+}*/
+
+

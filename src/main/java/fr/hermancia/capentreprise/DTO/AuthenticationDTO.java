@@ -1,4 +1,6 @@
 package fr.hermancia.capentreprise.DTO;
 
-public class AuthenticationUserDTO {
+public record AuthenticationDTO(String username, String password) {
+
+
 }

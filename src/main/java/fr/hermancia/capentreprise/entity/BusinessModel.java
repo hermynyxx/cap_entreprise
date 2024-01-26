@@ -1,6 +1,8 @@
 package fr.hermancia.capentreprise.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.hermancia.capentreprise.entity.interfaces.NameAndIdInterface;
+import fr.hermancia.capentreprise.entity.interfaces.SluggerInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class BusinessModel {
+public class BusinessModel implements
+                        SluggerInterface,
+                        NameAndIdInterface {
 
 
         @Id
@@ -31,5 +35,10 @@ public class BusinessModel {
         @OneToMany(mappedBy = "businessModel")
         //@JsonView(JsonViews.GameListShowView.class)
         private List<Game> games = new ArrayList<>();
+
+        @Override
+        public String getField() {
+                return name;
+        }
 }
 

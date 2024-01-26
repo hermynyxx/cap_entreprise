@@ -1,2 +1,4 @@
-package fr.hermancia.capentreprise.DTO;public class PublisherDTO {
+package fr.hermancia.capentreprise.DTO;
+
+public class PublisherDTO {
 }

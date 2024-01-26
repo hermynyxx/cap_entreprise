@@ -1,6 +1,8 @@
 package fr.hermancia.capentreprise.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.hermancia.capentreprise.entity.interfaces.NameAndIdInterface;
+import fr.hermancia.capentreprise.entity.interfaces.SluggerInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,44 +20,34 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Game {
+public class Game implements
+                  SluggerInterface,
+                  NameAndIdInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@JsonView(JsonViews.GameListShowView.class)
     private Long id;
 
-    //@JsonView(JsonViews.GameSimpleView.class)
     private String name;
 
-    //@JsonView(JsonViews.GameListShowView.class)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
 
-    //@JsonView(JsonViews.GameListShowView.class)
     private LocalDate publishedAt;
 
-    //@JsonView(JsonViews.GameSimpleView.class)
-    private String thumbnailCover;
 
-    //@JsonView(JsonViews.GameSimpleView.class)
+    private String image;
+
     private String slug;
 
     @ManyToOne
-    //@JsonView(JsonViews.GameListShowView.class)
     private Publisher publisher;
 
     @OneToMany(mappedBy = "game")
-    //@JsonView(JsonViews.GameListShowView.class)
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-            name = "game_platform",
-            joinColumns = @JoinColumn(name = "game_id"),
-            inverseJoinColumns = @JoinColumn(name = "platform_id")
-    )
-    //@JsonView(JsonViews.GameListShowView.class)
     private List<Platform> platforms = new ArrayList<>();
 
 
@@ -67,12 +59,19 @@ public class Game {
 
 
     @ManyToOne
-    //@JsonView(JsonViews.GameListShowView.class)
     private Classification classification;
 
     @ManyToOne
-    //@JsonView(JsonViews.GameListShowView.class)
     private BusinessModel businessModel;
 
+    @Override
+    public String getField() {
+        return name;
+    }
 
+    public void addPlatform(Platform platform) {
+        if (!platforms.contains(platform)) {
+            platforms.add(platform);
+        }
+    }
 }

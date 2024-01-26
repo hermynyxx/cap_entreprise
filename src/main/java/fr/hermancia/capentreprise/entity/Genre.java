@@ -1,6 +1,8 @@
 package fr.hermancia.capentreprise.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.hermancia.capentreprise.entity.interfaces.NameAndIdInterface;
+import fr.hermancia.capentreprise.entity.interfaces.SluggerInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Genre {
+public class Genre implements
+                    SluggerInterface,
+                    NameAndIdInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +32,9 @@ public class Genre {
     @OneToMany(mappedBy = "genre")
     //@JsonView(JsonViews.GameListShowView.class)
     private List<Game> games = new ArrayList<>();
+
+    @Override
+    public String getField() {
+        return name;
+    }
 }

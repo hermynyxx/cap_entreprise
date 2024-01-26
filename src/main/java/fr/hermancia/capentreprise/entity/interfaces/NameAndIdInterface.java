@@ -1,2 +1,11 @@
-package fr.hermancia.capentreprise.entity.interfaces;public class NameAndIdInterface {
+package fr.hermancia.capentreprise.entity.interfaces;
+
+public interface NameAndIdInterface {
+
+
+    void setId(Long id);
+
+    void setName(String name);
+
 }
+

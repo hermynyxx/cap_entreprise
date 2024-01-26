@@ -1,79 +1,74 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="tag.jsp" %>
-<jsp:include flush="true" page="base.jsp"/>
+<c:set var="title" scope="request" value="???????????"/>
+<jsp:include flush="true" page="${contextPath}/WEB-INF/jsp/base.jsp"/>
 
+<div class="container">
+    <h1>Bonjour <security:authentication property="name"/></h1>
 
-    <section>
-            <div class="container" id = "container-video">
-                <div class="row d-none d-sm-block d-lg-block">
-                    <video class="w-100" id="background-video" autoplay loop muted>
-                        <source id = "background-video2" src="https://www.leagueoflegends.com/static/hero-3e934348790824f4b800524f96a93020.mp4" type="video/mp4">
-                    </video>
-                    <div class="position-relative">
-                        <div class="position-absolute bottom-0 start-0"  id ="content">
-                            <h1 class="display-3">
-                               <span class="fw-bold" style="color: orange;">H</span><span class="fw-bolder" style="color: #fff;">GAMES</span>
-                            </h1>
-                            <form class="d-flex py-2 px-2" role="search">
-                                <button class="btn btn-outline-success bolder btn-sm " type="submit" id ="btn-navbar">CONNEXION</button>
-                            </form>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex">
+            <!-- Label à afficher -->
+            <c:set var="label" scope="request" value="Date"/>
+            <!-- Sur quelle propriété de l'objet on souhaite trier -->
+            <c:set var="sortable" value="createdAt"/>
+            <%@ include file="component/sortable.jsp" %>
+
+            <c:set var="label" scope="request" value="Note"/>
+            <c:set var="sortable" value="rating"/>
+            <%@ include file="component/sortable.jsp" %>
+
+            <c:set var="label" scope="request" value="Jeu"/>
+            <c:set var="sortable" value="game.name"/>
+            <%@ include file="component/sortable.jsp" %>
+
+            <c:set var="label" scope="request" value="Joueur"/>
+            <c:set var="sortable" value="gamer.nickname"/>
+            <%@ include file="component/sortable.jsp" %>
+
+            <span class="mt-auto mb-2">
+                <a href="${currentUrl}" class="btn-link">
+                    Reset
+                </a>
+            </span>
+        </div>
+        <div  class="mt-auto mb-2">
+            <span>
+                page ${reviewsList.number + 1} sur ${reviewsList.totalPages}
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <c:forEach items="${reviewsList.content}" var="review">
+            <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
+                <div class="main-review-card w-100">
+                    <p class="text-center">
+                        Le ${dateUtils.getDateFormat(review.createdAt, "dd/MM/yyyy")}
+                        par <a class="btn-link" href="#">${review.gamer.nickname}</a>
+                        <c:if test="${review.moderator != null}">
+                            <i class="fa-solid fa-check"></i>
+                        </c:if>
+                    </p>
+                    <div class="review-card w-100">
+                        <p class="review-description">
+                            ${jspUtils.excerpt(review.description, 209)}
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <p class="${jspUtils.getCssClas(review.rating)}">
+                                ${jspUtils.getStringRating(review.rating)} / 20
+                            </p>
+                            <a class="btn-link" href="#">
+                                ${review.game.name}
+                            </a>
                         </div>
                     </div>
                 </div>
-           </div>
-    </section>
-
-   <%-- *********************************************** --%>
-<div class="container my-5">
-    <h2 class="my-5 fw-bolder fst-italic">NOS DERNIERES SORTIES</h2>
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-4 g-4">
-        <c:forEach items="${gamesReleased}" var="game">
-        <div class="col">
-            <div class="card h-100 bg-dark card-index" style="width: 15rem";>
-                <img src="${game.thumbnailCover}" class="img-fluid card-img-top"  id= "img-index" alt="${game.name}">
-
-                <div class="card-footer custom-card">
-                <a  href="${s:mvcUrl('AppGame#show').arg(0, game.slug).build()}">
-                                    <p class="card-title text-end">${game.name}</p>
-                                    </a>
-                    <p class="card-text text-end">${game.price}€</p>
-                </div>
             </div>
-        </div>
         </c:forEach>
     </div>
-</div>
+    <c:set var="page" scope="request" value="${reviewsList}"/>
+    <%@ include file="component/pagination.jsp" %>
 
-<div class="container my-5">
-    <h2 class="my-5 fw-bolder text-end fst-italic">RECHERCHE PAR CATEGORIE</h2>
-
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
-</div>
-
 
 <%@ include file="footer.jsp" %>

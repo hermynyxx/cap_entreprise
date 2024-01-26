@@ -1,5 +1,7 @@
 package fr.hermancia.capentreprise.entity;
 
+import fr.hermancia.capentreprise.entity.interfaces.NameAndIdInterface;
+import fr.hermancia.capentreprise.entity.interfaces.SluggerInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Publisher {
+public class Publisher implements
+                        SluggerInterface,
+                        NameAndIdInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +31,9 @@ public class Publisher {
     private List<Game> games = new ArrayList<>();
 
     private String slug;
+
+    @Override
+    public String getField() {
+        return name;
+    }
 }

@@ -1,6 +1,8 @@
 package fr.hermancia.capentreprise.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.hermancia.capentreprise.entity.interfaces.NameAndIdInterface;
+import fr.hermancia.capentreprise.entity.interfaces.SluggerInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +18,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Classification {
+public class Classification implements
+                            SluggerInterface,
+                            NameAndIdInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +31,16 @@ public class Classification {
     private String name;
 
 
+    //@JsonView(JsonViews.PegiShowView.class)
+    private String slug;
+
+
     @OneToMany(mappedBy = "classification")
     //@JsonView(JsonViews.GameListShowView.class)
     private List<Game> games = new ArrayList<>();
 
-
-    //@JsonView(JsonViews.PegiShowView.class)
-    private String slug;
+    @Override
+    public String getField() {
+        return name;
+    }
 }

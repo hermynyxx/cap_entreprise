@@ -1,2 +1,13 @@
-package fr.hermancia.capentreprise.entity.interfaces;public interface SluggerInterface {
+package fr.hermancia.capentreprise.entity.interfaces;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public interface SluggerInterface {
+
+
+    void setSlug(String slug);
+
+    @JsonIgnore
+    String getField();
+
 }

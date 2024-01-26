@@ -1,8 +1,16 @@
 package fr.hermancia.capentreprise.repository;
 
 import fr.hermancia.capentreprise.entity.User;
+import fr.hermancia.capentreprise.repository.intefaces.EntityFindByEmailRepository;
+import fr.hermancia.capentreprise.repository.intefaces.EntityFindByNicknameRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository  extends
-        JpaRepository<User, Long>{
+import java.util.Optional;
+
+public interface UserRepository
+        extends
+        JpaRepository<User, Long>,
+        EntityFindByEmailRepository<User>,
+        EntityFindByNicknameRepository<User>{
+
 }

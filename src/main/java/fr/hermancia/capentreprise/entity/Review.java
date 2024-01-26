@@ -1,6 +1,7 @@
 package fr.hermancia.capentreprise.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.hermancia.capentreprise.entity.interfaces.SluggerInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,13 +24,13 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    private String content;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String description;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    private float rating;
+    private Float rating;
 
     @CreationTimestamp
     private LocalDateTime moderationDate;
@@ -42,4 +43,7 @@ public class Review {
 
     @ManyToOne
     private Game game;
+
+
+
 }

@@ -1,2 +1,4 @@
-package fr.hermancia.capentreprise.DTO;public class ReviewDTO {
+package fr.hermancia.capentreprise.DTO;
+
+public class ReviewDTO {
 }

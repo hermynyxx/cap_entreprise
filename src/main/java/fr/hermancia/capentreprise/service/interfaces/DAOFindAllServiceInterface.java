@@ -1,2 +1,9 @@
-package fr.hermancia.capentreprise.service.interfaces;public class DAOFindAllServiceInterface {
+package fr.hermancia.capentreprise.service.interfaces;
+
+import java.util.List;
+
+public interface DAOFindAllServiceInterface<T>{
+
+    List<T> findAll();
+
 }
