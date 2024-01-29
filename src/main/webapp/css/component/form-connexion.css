@@ -43,6 +43,17 @@
     text-decoration: none;
 }
 
+.background-radial-gradient {
+
+
+
+@media (max-width: 576px) {
+    body {
+           max-height: 1200px;
+       }
+}
+
+
 .customlink:visited {
     color: black;
     background-color: transparent;

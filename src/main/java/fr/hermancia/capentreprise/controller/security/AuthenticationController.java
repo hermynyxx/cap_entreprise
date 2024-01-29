@@ -1,4 +1,4 @@
-package fr.hermancia.capentreprise.controller;
+package fr.hermancia.capentreprise.controller.security;
 
 import fr.hermancia.capentreprise.DTO.RegistrationUserDTO;
 import fr.hermancia.capentreprise.mapping.UrlRoute;

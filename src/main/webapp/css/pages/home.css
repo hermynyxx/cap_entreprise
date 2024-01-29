@@ -1,12 +1,34 @@
-/*.custom-card {
-    display:none;
-}*/
-.main-content {
-    margin-top: 6em;
+.section-carousel{
+    height:auto;
+    width:100%;
+    background-color:black;
 }
 
+.main-content {
+    margin-top: 5em;
+
+}
+
+.btn-outline-success {
+         --bs-btn-color: orange;
+         --bs-btn-border-color: orange;
+         --bs-btn-hover-color: #582900;
+         --bs-btn-hover-bg: orange;
+         --bs-btn-hover-border-color: orange;
+         --bs-btn-focus-shadow-rgb: 25,135,84;
+         --bs-btn-active-color: black;
+         --bs-btn-active-bg: orange;
+         --bs-btn-active-border-color: orange;
+         --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+         --bs-btn-disabled-color:orange;
+         --bs-btn-disabled-bg: transparent;
+         --bs-btn-disabled-border-color: orange;
+         --bs-gradient: none;
+    }
+
 .background-container {
-    height: auto;
+    margin-top:3.5em;
+    height: 125vh;
     width:100%;
     filter: blur(20px);
     -webkit-filter: blur(20px);
@@ -17,18 +39,72 @@
     border-style:solid;
 }
 
+
 #background-video {
     height: auto;
     width: 60vw;
-    outline: 1px solid #1c87c9;
-    outline-offset: 0.5px;
     object-fit: cover;
 
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: 0;
+    display:block;
+    margin:0;
+    padding:20px;
+
+}
+
+#carouselExampleFade{
+    background-color:black;
+    border-radius:50%;
+
+
+
+}
+
+.container-carousel{
+    margin-left:1em;
+    border-style: solid;
+    border-color:transparent;
+    border-radius: 50%;
+    border-width:0.5em;
+    animation:rot 1s linear infinite;
+    padding:1px;
+
+}
+
+.container-carousel > div {
+  background:black;
+  border-style: solid;
+  border-color:transparent;
+   border-radius: 50%;
+  border-width:1px;
+
+}
+
+.container-video {
+    margin-top:-50em;
+    position:relative;
+
+}
+
+
+
+.test{
+    width: 90vw;
+    height:70vh;
+    outline: 0.4px solid #1c87c9;
+    outline-offset: 1px;
+    padding:0;
+    height: auto;
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
     display:block;
     margin:0;
     padding:20px;
@@ -36,11 +112,6 @@
 }
 
 
-#container-video {
-    height: auto;
-    margin-top:-36em;
-    position:relative;
-}
 
 @media (prefers-color-scheme: dark) {
     body {
@@ -59,16 +130,33 @@
     position:relative;
 }
 
+.img-carousel{
+    background-color:black;
+    border-radius: 50%;
+}
 
-#content {
+.container-carousel{
+    background-color:black;
+    border-radius: 50%;
+    border:solid;
+    padding:4em;
+}
+
+.content {
   position: absolute;
   bottom: 0;
   background: rgba(0, 0, 0, 0.00001);
   color: #f1f1f1;
   width: 100%;
-  padding: 2em;
+  margin-left:3em;
+  margin-bottom:3em;
+  }
 
-  .presentation {
-      top:40%;
-    }
+.section-carousel{
+    margin-top:2em;
+    margin-bottom:2em;
+
+}
+
+
 

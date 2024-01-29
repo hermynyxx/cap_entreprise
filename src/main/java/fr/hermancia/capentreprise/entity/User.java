@@ -24,6 +24,8 @@ public abstract class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
+    protected String image;
+
 
     @Column(nullable = false)
     protected String nickname;

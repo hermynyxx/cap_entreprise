@@ -43,6 +43,8 @@ public class RegistrationUserDTO {
     @Size(message = "Le mot de passe doit contenir au moins neuf caractères.", min = 9)
     private String password;
 
+    private String image;
+
 
     private LocalDate birthAt;
 

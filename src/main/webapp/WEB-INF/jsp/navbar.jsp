@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="navbar">
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
         <div class="container-fluid">
             <a class="navbar-brand me-2" href="">
                 <img src="${contextPath}/css/asset/logo.png" alt="logo" id="logo" style="width:60px; height:60px">
@@ -25,9 +26,18 @@
                         <a class="nav-link  custom-link fw-bolder" aria-current="page" href="">ABONNEMENTS</a>
                     </li>
                 </ul>
-                <form class="d-flex py-2 px-2" role="search">
-                        <button class="btn btn-outline-success bolder btn-sm rounded-pill" type="submit" id:"btn-navbar">CONNEXION</button>
-                </form>
+                        <c:if test="${userLogged != null }">
+                            <div>
+                            <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                            <p class="navbar-text fs-6 fw-lighter text-light my-1">${userLogged.nickname}</p>
+                            <div>
+                        </c:if>
+                        <c:if test="${userLogged==null}">
+                        <a class="d-flex py-2 px-2" href="${UrlRoute.URL_LOGIN}"> <button class="btn btn-outline-success bolder btn-sm rounded-pill" type="submit" id:"btn-navbar">CONNEXION</button></a>
+                        </c:if>
             </div>
         </div>
     </nav>
+

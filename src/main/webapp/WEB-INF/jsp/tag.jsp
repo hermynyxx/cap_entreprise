@@ -11,7 +11,8 @@
 <%@ page import="org.springframework.web.context.WebApplicationContext" %>
 <%@ page import="fr.hermancia.capentreprise.utils.DateUtils" %>
 <%@ page import="fr.hermancia.capentreprise.utils.JspUtils" %>
-
+<%@ page import="fr.hermancia.capentreprise.entity.User" %>
+<%@ page import="fr.hermancia.capentreprise.service.UserService" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <%
@@ -30,10 +31,10 @@
     if (ctx != null) {
         request.setAttribute("dateUtils", ctx.getBean(DateUtils.class));
         request.setAttribute("jspUtils", ctx.getBean(JspUtils.class));
-//        UserService userService = ctx.getBean(UserService.class);
-//        if (request.getUserPrincipal() != null) {
-//            User user = userService.findByEmail(request.getUserPrincipal().getName());
-//            request.setAttribute("userLogged", user);
-//        }
+      UserService userService = ctx.getBean(UserService.class);
+        if (request.getUserPrincipal() != null) {
+            User user = userService.findByNickname(request.getUserPrincipal().getName());
+            request.setAttribute("userLogged", user);
+        }
     }
 %>

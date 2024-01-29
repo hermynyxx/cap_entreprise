@@ -9,6 +9,8 @@ public class UrlRoute {
 
     public final static String URL_HOME = "/home";
 
+    public final static String URL_USER = "/user";
+
     public final static String URL_REVIEW ="/review";
 
 }

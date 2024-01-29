@@ -7,6 +7,7 @@ import fr.hermancia.capentreprise.entity.User;
 import fr.hermancia.capentreprise.repository.UserRepository;
 import fr.hermancia.capentreprise.service.interfaces.DAOFindAllServiceInterface;
 import fr.hermancia.capentreprise.service.interfaces.DAOFindByIdServiceInterface;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -60,7 +61,7 @@ public class UserService
 
     @Override
     public User findById(Long id) {
-        return null;
+        return userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public void create(RegistrationUserDTO registrationDTO) {
@@ -78,4 +79,43 @@ public class UserService
         this.userRepository.saveAndFlush(user);
 
     }
+
+    public User edit(String name, RegistrationUserDTO userPutDTO) {
+        Optional<User> optionalUser = userRepository.findByNickname(name);
+        optionalUser.orElseThrow(() -> new EntityNotFoundException("L'élément n'a pas été trouvé."));
+        User user = optionalUser.get();
+        return handleEdit(user, userPutDTO);
+    }
+
+    public User edit(Long id, RegistrationUserDTO userPutDTO) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        optionalUser.orElseThrow(() -> new EntityNotFoundException("Lélément n'a pas été trouvé."));
+        User user = optionalUser.get();
+        return handleEdit(user, userPutDTO);
+    }
+
+    private User handleEdit(User user, RegistrationUserDTO userPutDTO) {
+        if (!userPutDTO.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(userPutDTO.getPassword()));
+        }
+        user.setImage(userPutDTO.getImage());
+        user.setNickname(userPutDTO.getUsername());
+
+        userRepository.flush();
+        return user;
+    }
+
+
+
+    public User findByNickname(String nickname) {
+        return userRepository.findByNickname(nickname).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public RegistrationUserDTO getUserPutDTOByUser(User user) {
+        RegistrationUserDTO userPutDTO = new RegistrationUserDTO();
+        userPutDTO.setUsername(user.getNickname());
+
+        return userPutDTO;
+    }
+
 }

@@ -17,7 +17,6 @@
                     et partagez vos exploits. Préparez-vous à vivre des moments inoubliables !
                 </p>
             </div>
-
             <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
                 <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
                 <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
@@ -52,8 +51,10 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
 </section>
 
 
 
-<%@ include file="../footer.jsp" %>
+

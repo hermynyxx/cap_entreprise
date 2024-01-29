@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -28,5 +29,17 @@ public class GameService
     public Game findById(Long id) {
         return gameRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public Game findBySlug(String slug) {
+        Optional<Game> optionalGame = gameRepository.findBySlug(slug);
+        if(optionalGame.isEmpty()) {
+            throw new RuntimeException("Cet élément n'existe pas.");
+        }
+        return optionalGame.get();
+    }
+
+    public Object findTop9ByOrderByPublishedAtDesc() {
+        return gameRepository.findTop9ByOrderByPublishedAtDesc();
     }
 }
