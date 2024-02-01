@@ -44,6 +44,12 @@ public class Review {
     @ManyToOne
     private Game game;
 
+    private boolean isModerated = false;
+
+    public boolean isModerated() {
+        return isModerated;
+    }
+
 
 
 }

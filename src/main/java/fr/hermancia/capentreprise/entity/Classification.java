@@ -24,15 +24,15 @@ public class Classification implements
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@JsonView(JsonViews.PegiShowView.class)
     private Long id;
 
-    //@JsonView(JsonViews.PegiShowView.class)
+
     private String name;
 
 
-    //@JsonView(JsonViews.PegiShowView.class)
     private String slug;
+
+    private String image;
 
 
     @OneToMany(mappedBy = "classification")

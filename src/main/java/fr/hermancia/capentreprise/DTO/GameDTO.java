@@ -1,11 +1,11 @@
 package fr.hermancia.capentreprise.DTO;
 
-import fr.hermancia.capentreprise.entity.BusinessModel;
-import fr.hermancia.capentreprise.entity.Genre;
-import fr.hermancia.capentreprise.entity.Platform;
+import fr.hermancia.capentreprise.entity.*;
 import fr.hermancia.capentreprise.validator.group.ValidationGroup;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,37 +21,27 @@ import java.util.List;
 @Setter
 public class GameDTO {
 
-    @NotBlank(
-            message = "Veuillez renseigner le nom du jeu",
-            groups = ValidationGroup.OnPutItem.class
-    )
-    private String name;
-
-
+    @NotBlank
     private String description;
 
+    @NotBlank
+    private String publishedAt;
 
+    @NotBlank
+    private String name;
 
-    @NotBlank(
-            message = "Veuillez renseigner une date valide",
-            groups = ValidationGroup.OnPutItem.class
-    )
-    private Date publishedAt;
+    @NotEmpty
+    private List<Platform> platforms;
 
-    private String image;
+    @NotNull
+    private Classification classification;
 
-    @NotBlank(
-            message = "Veuillez renseigner le nom d'un éditeur pour ce jeu",
-            groups = ValidationGroup.OnPutItem.class
-    )
-    private Long publisher_id;
+    @NotNull
+    private Genre genre;
 
-    private List<Platform> platforms = new ArrayList<>();
+    @NotNull
+    private BusinessModel businessModel;
 
-    private List<Genre> genreList = new ArrayList<>();
-
-
-    private Long classification_id;
-
-    private List<BusinessModel> businessModels = new ArrayList<>();
+    @NotNull
+    private Publisher publisher;
 }

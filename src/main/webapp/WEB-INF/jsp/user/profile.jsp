@@ -1,71 +1,57 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../tag.jsp" %>
-<jsp:include flush="true" page="../base.jsp"/>
 <c:set var="title" scope="request" value="${user.nickname}"/>
-
+<jsp:include flush="true" page="${contextPath}/WEB-INF/jsp/base.jsp"/>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn-link" href="${contextPath}/">Accueil</a></li>
+            <li class="breadcrumb-item"><a class="btn-link" href="${contextPath}${UrlRoute.URL_GAME}">Les jeux</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${user.nickname}</li>
+            <li class="breadcrumb-item active"><a class="btn-link" href="#user-reviews">Les commentaires</a></li>
+        </ol>
+    </nav>
+    <h1>${user.nickname}</h1>
+    <c:if test="${!user.moderator}">
+        <p>${dateUtils.getAgeFromDate(user.birthAt)} ans</p>
+    </c:if>
 
-                ${user.name}
-                <c:if test="${user.nickname == userLogged.nickname}">
-                    <button class="btn btn-link" data-edit-profile-button>
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                </c:if>
-            </h1>
-            <p>Created at : <fmt:formatDate value="${user.birthAt}" pattern="dd-MM-yyyy" /></p>
-            <c:if test="${user.name == userLogged.name}">
-                <p>Email : ${user.email}</p>
-            </c:if>
-            <p>Nickname : ${user.nickname}</p>
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <c:if test="${user.name == userLogged.name}">
-                <div class="d-none" data-edit-profile-form>
-                <f:form modelAttribute="userPutDto" method="post" action="${uri}">
-                    <div class="mb-3 row">
-                        <f:label path="nickname" class="col-sm-2 col-form-label">Nickname</f:label>
-                        <div class="col-sm-10">
-                            <f:input type="text" cssClass="form-control" path="nickname"/>
-                            <f:errors path="nickname" cssClass="invalid-feedback"/>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <f:label path="password" class="col-sm-2 col-form-label">Password</f:label>
-                        <div class="col-sm-10">
-                            <f:input type="password" cssClass="form-control" path="password"/>
-                            <f:errors path="password" cssClass="invalid-feedback"/>
-                        </div>
-                    </div>
+    <div id="user-reviews"
+         class="my-5"
+    >
+        <h2>Commentaires</h2>
+        <c:if test="${pageReviews.content.size() > 0}">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <!-- Label à afficher -->
+                    <c:set var="label" scope="request" value="Date"/>
+                    <!-- Sur quelle propriété de l'objet on souhaite trier -->
+                    <c:set var="sortable" value="createdAt"/>
+                    <%@ include file="../component/sortable.jsp" %>
 
-                    <f:button class="btn btn-secondary" type="reset">Reset</f:button>
-                    <f:button class="btn btn-primary">Submit</f:button>
-                </f:form>
-            </div>
-            </c:if>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <h2>Ses jeux</h2>
-        <c:forEach items="${user.userOwnGames}" var="uog">
-            <a class="col-md-4 mt-2 main-game-card" href="${UrlRoute.URL_GAME}/${uog.game.slug}">
-                <div class="game-card">
-                    <div class="game-card-img">
-                        <img alt="${uog.game.name}" src="${uog.game.image}">
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>${uog.game.name}</p>
-                        <c:if test="${user.name != userLogged.name}">
-                            <p>${uog.game.price}€</p>
-                        </c:if>
-                    </div>
+                    <c:set var="label" scope="request" value="Note"/>
+                    <c:set var="sortable" value="rating"/>
+                    <%@ include file="../component/sortable.jsp" %>
+
+                    <c:set var="label" scope="request" value="Joueur"/>
+                    <c:set var="sortable" value="gamer.nickname"/>
+                    <%@ include file="../component/sortable.jsp" %>
+
+                    <%@ include file="../component/filter-reset.jsp" %>
                 </div>
-            </a>
-        </c:forEach>
-    </div>
+
+                <c:set var="page" scope="request" value="${pageReviews}"/>
+                <%@ include file="../component/pagination-number.jsp" %>
+            </div>
+            <div class="row">
+                <c:forEach items="${pageReviews.content}" var="review">
+                    <%@ include file="../component/entity/review-card.jsp" %>
+                </c:forEach>
+            </div>
+            <%@ include file="../component/pagination.jsp" %>
+        </div>
+    </c:if>
 </div>
 
 <%@ include file="../footer.jsp" %>

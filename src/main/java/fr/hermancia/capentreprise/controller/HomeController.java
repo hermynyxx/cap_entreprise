@@ -18,7 +18,11 @@ public class HomeController {
 
     @GetMapping(value = UrlRoute.URL_HOME)
     public ModelAndView listGame(ModelAndView mav,Principal principal) {
-
+        if (principal != null) {
+            // get the full object User => userService.findByNickname();
+            // if user.isAdmin => redirect to /admin
+            // else redirect => ???
+        }
         mav.addObject("gamesReleased", gameService.findTop9ByOrderByPublishedAtDesc());
         mav.setViewName("home");
 

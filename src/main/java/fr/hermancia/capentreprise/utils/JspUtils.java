@@ -8,11 +8,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 @AllArgsConstructor
 public class JspUtils {
 
-
-        public String excerpt(String text, int size) {
-            if (text.length() <= size) return text;
-            return text.substring(0, size) + "...";
+    public String excerpt(String text, int size) {
+        if (text.length() <= size) return text;
+        String finalText = text.substring(0, size) + "...";
+        if (!finalText.contains("</strong>")) {
+            finalText += "</strong>";
         }
+        return finalText;
+    }
 
         public String getCssClas(float rating) {
             if (rating <= 5) return "rating-5";
@@ -63,13 +66,25 @@ public class JspUtils {
             return urlOut;
         }
 
-        private UriComponentsBuilder addQueryParam(UriComponentsBuilder uri, String queryParamName, String queryParamValue) {
-            if (queryParamName.equals("sort") &&
-                    !uri.toUriString().contains(queryParamValue.split(",")[0])
-            ) {
-                return uri.queryParam(queryParamName, queryParamValue);
+    private UriComponentsBuilder addQueryParam(UriComponentsBuilder uri, String queryParamName, String queryParamValue) {
+        if (queryParamName.equals("sort")) {
+            String queryAttribute = queryParamValue.split(",")[0];
+            if (uri.toUriString().contains(queryParamName + "=" + queryAttribute + ",")) {
+                String replacement = "";
+                if (!uri.toUriString().contains(queryParamName + "=" + queryParamValue)) {
+                    replacement = "sort=" + queryAttribute + ",desc";
+                    if (queryParamValue.contains("asc")) {
+                        replacement = "sort=" + queryAttribute + ",asc";
+                    }
+                }
+                uri = UriComponentsBuilder.fromHttpUrl(
+                        uri.toUriString()
+                                .replaceAll("sort=" + queryAttribute + ",(asc|desc)", replacement));
+                return uri;
             }
-            return uri.replaceQueryParam(queryParamName, queryParamValue);
+            return uri.queryParam(queryParamName, queryParamValue);
         }
-
+        return uri.replaceQueryParam(queryParamName, queryParamValue);
     }
+
+}

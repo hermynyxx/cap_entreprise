@@ -1,0 +1,11 @@
+.card-review {
+  border: none;
+  border-radius:0px;
+}
+
+.col-review{
+   padding:10px;
+   height:50px;
+    background-color: transparent;
+}
+

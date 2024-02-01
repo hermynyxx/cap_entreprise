@@ -2,14 +2,15 @@ package fr.hermancia.capentreprise.entity;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,5 +22,7 @@ public class Gamer extends User{
 
     private LocalDate birthAt;
 
+    @OneToMany(mappedBy = "gamer")
+    private List<Review> reviews = new ArrayList<>();
 
 }

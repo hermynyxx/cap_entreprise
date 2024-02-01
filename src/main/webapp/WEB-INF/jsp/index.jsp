@@ -1,10 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="tag.jsp" %>
-<c:set var="title" scope="request" value="???????????"/>
+<c:set var="title" scope="request" value="Avis"/>
 <jsp:include flush="true" page="${contextPath}/WEB-INF/jsp/base.jsp"/>
 
-<div class="container">
-    <h1>Bonjour <security:authentication property="name"/></h1>
+<div class="background-container background-image-page d-none d-sm-block d-lg-block ">
+    <img src="${contextPath}/css/asset/pikachu.png" class:"img-fluid img-cover"alt="pikachu" id="pikachu" style="width:500px; height 500px">
+</div>
+
+<div class="container mt-5 first-container-review" style="background-image:url('')">
+<div class="container mt-5 p-5 ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Accueil</li>
+            <li class="breadcrumb-item"><a class="btn-link" href="${contextPath}${UrlRoute.URL_GAME}">Les jeux</a></li>
+        </ol>
+    </nav>
 
     <div class="d-flex justify-content-between">
         <div class="d-flex">
@@ -26,49 +36,50 @@
             <c:set var="sortable" value="gamer.nickname"/>
             <%@ include file="component/sortable.jsp" %>
 
-            <span class="mt-auto mb-2">
-                <a href="${currentUrl}" class="btn-link">
-                    Reset
-                </a>
-            </span>
+            <security:authorize access="hasRole('MODERATOR')">
+                <div class="sort-filter mt-4 me-3">
+                <select class="form-select sortable-select">
+                    <option value="all" data-filter-url="${currentUrl}">
+                        Tous les commentaires
+                    </option>
+                    <option value="sort=moderator,desc"
+                            data-filter-url="${jspUtils.generateUrlFrom(currentUrl, currentQuery, "sort=moderator,desc")}"
+                    >
+                        Modérés
+                    </option>
+                    <option value="sort=moderator,asc"
+                            data-filter-url="${jspUtils.generateUrlFrom(currentUrl, currentQuery, "sort=moderator,asc")}"
+                    >
+                        À modérer
+                    </option>
+                </select>
+            </div>
+            </security:authorize>
+
+            <%@ include file="component/filter-reset.jsp" %>
         </div>
-        <div  class="mt-auto mb-2">
-            <span>
-                page ${reviewsList.number + 1} sur ${reviewsList.totalPages}
-            </span>
-        </div>
+
+        <c:set var="page" scope="request" value="${reviewsList}"/>
+        <%@ include file="component/pagination-number.jsp" %>
     </div>
-    <div class="row">
+
+    <div class="container container-card-review">
         <c:forEach items="${reviewsList.content}" var="review">
-            <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
-                <div class="main-review-card w-100">
-                    <p class="text-center">
-                        Le ${dateUtils.getDateFormat(review.createdAt, "dd/MM/yyyy")}
-                        par <a class="btn-link" href="#">${review.gamer.nickname}</a>
-                        <c:if test="${review.moderator != null}">
-                            <i class="fa-solid fa-check"></i>
-                        </c:if>
-                    </p>
-                    <div class="review-card w-100">
-                        <p class="review-description">
-                            ${jspUtils.excerpt(review.description, 209)}
-                        </p>
-                        <div class="d-flex justify-content-between">
-                            <p class="${jspUtils.getCssClas(review.rating)}">
-                                ${jspUtils.getStringRating(review.rating)} / 20
-                            </p>
-                            <a class="btn-link" href="#">
-                                ${review.game.name}
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col s-6 col-review">
+                <%@ include file="component/entity/review-card.jsp" %>
             </div>
         </c:forEach>
     </div>
-    <c:set var="page" scope="request" value="${reviewsList}"/>
+    <security:authorize access="hasRole('MODERATOR')">
+        <div>
+            <a href="${UrlRoute.URL_EXPORT}" class="btn btn-link">
+                <i class="fa-solid fa-file-excel me-1"></i>
+                Télécharger export Excel
+            </a>
+        </div>
+    </security:authorize>
     <%@ include file="component/pagination.jsp" %>
-
+</div>
 </div>
 
 <%@ include file="footer.jsp" %>

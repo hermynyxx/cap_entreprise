@@ -1,13 +1,34 @@
+
+.vc {
+    filter:blur(9px);
+}
+
+.background-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -999;
+}
+
+.background-image-page {
+    left: 30%;
+    opacity: 0.8;
+}
+
+.section-video{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
 .section-carousel{
-    height:auto;
+    height:110vh;
     width:100%;
     background-color:black;
 }
 
-.main-content {
-    margin-top: 5em;
-
-}
 
 .btn-outline-success {
          --bs-btn-color: orange;
@@ -26,41 +47,29 @@
          --bs-gradient: none;
     }
 
-.background-container {
-    margin-top:3.5em;
-    height: 125vh;
+.section{
+    height:100vh;
     width:100%;
-    filter: blur(20px);
-    -webkit-filter: blur(20px);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-sizing: border-box;
-    border-style:solid;
+}
+
+.container-video{
+    position: relative;
+    top: 20%;
+    width:80%;
+}
+
+@media (min-width: 768px) {
+    .container-video {
+        max-width: 800px;
+        max-height:500px
+    }
 }
 
 
-#background-video {
-    height: auto;
-    width: 60vw;
-    object-fit: cover;
-
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 0;
-    display:block;
-    margin:0;
-    padding:20px;
-
-}
 
 #carouselExampleFade{
     background-color:black;
     border-radius:50%;
-
-
 
 }
 
@@ -84,38 +93,18 @@
 
 }
 
-.container-video {
-    margin-top:-50em;
-    position:relative;
 
-}
-
-
-
-.test{
-    width: 90vw;
-    height:70vh;
-    outline: 0.4px solid #1c87c9;
-    outline-offset: 1px;
-    padding:0;
-    height: auto;
-    object-fit: cover;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 0;
-    display:block;
-    margin:0;
-    padding:20px;
-
-}
+@media screen and (max-width: 768px) {
+    .background-container {
+      display: none;
+    }
+  }
 
 
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
     body {
-        background-color: #1c1c1e;
+        background-color: black;
         color: #fefefe;
           }
     a {
@@ -124,11 +113,9 @@
     img {
         filter: grayscale(20%);
         }
-    }
+ }*/
 
-.parent{
-    position:relative;
-}
+
 
 .img-carousel{
     background-color:black;
@@ -152,10 +139,14 @@
   margin-bottom:3em;
   }
 
-.section-carousel{
-    margin-top:2em;
-    margin-bottom:2em;
+.test{
+    outline: 0.4px solid #1c87c9;
+    outline-offset: 1px;
 
+}
+
+.first-container-review{
+    background-repeat:no-repeat;
 }
 
 

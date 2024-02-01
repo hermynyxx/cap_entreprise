@@ -1,33 +1,50 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../tag.jsp" %>
-<jsp:include flush="true" page="../base.jsp"/>
+<c:set var="title" scope="request" value="${game.name}"/>
+<jsp:include flush="true" page="${contextPath}/WEB-INF/jsp/base.jsp"/>
 
 <div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn-link" href="${contextPath}/">Accueil</a></li>
+            <li class="breadcrumb-item"><a class="btn-link" href="${contextPath}${UrlRoute.URL_GAME}">Les jeux</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${game.name}</li>
+            <li class="breadcrumb-item active"><a class="btn-link" href="#game-reviews">Les commentaires</a></li>
+        </ol>
+    </nav>
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12">
             <div class="container-img p-3">
-                <img alt="${game.name}" src="${game.thumbnailCover}">
+                <img alt="${game.name}" src="${game.image}">
             </div>
         </div>
+        <div class="col-md-6 col-sm-12">
+            <h1>${game.name}</h1>
+            <p class="m-0">Sorti le : ${dateUtils.getDateFormat(game.publishedAt, "dd/MM/yyyy")}</p>
+            <p class="m-0">Editeur : <a class="link-if" href="#">${game.publisher.name}</a></p>
+            <p class="m-0">Genre : <a class="link-if" href="#">${game.genre.name}</a></p>
+            <p class="m-0">Modèle économique : <a class="link-if" href="#">${game.businessModel.name}</a></p>
+            <p class="m-0">Classification : <a class="link-if" href="#">${game.classification.name}</a></p>
 
-            <p class="m-0 mt-1">Genres :
-                <c:forEach items="${game.categories}" var="category">
-                </c:forEach>
-            </p>
             <c:if test="${game.platforms.size() > 0}">
                 <p class="m-0">Disponible sur :</p>
                 <ul class="list-unstyled">
                     <c:forEach items="${game.platforms}" var="platform">
                         <li>
-                                ${platform.name}
+                            <a class="link-if" href="#">
+                                    ${platform.name}
                             </a>
                         </li>
                     </c:forEach>
                 </ul>
             </c:if>
-
         </div>
     </div>
+
+    TML
+
+
+
 
     <h2 class="my-5">Description</h2>
 
@@ -35,46 +52,79 @@
         <c:out value="${game.description}" escapeXml="false"/>
     </div>
 
-    <h2 class="my-3">Commentaires</h2>
-        <c:if test="${game.reviews.size() > 0}">
+    <div id="game-reviews"
+         class="my-5"
+    >
+        <h1>
+            Commentaires
+            <button class="ms-2 btn btn-link"
+                    title="Ajouter un commentaire"
+                    data-hide-show-button="formReview"
+            >
+                <i class="fa fa-pen fa-2x"></i>
+            </button>
+        </h1>
+        <div class="my-3 d-none"
+             data-hide-show-container="formReview"
+        >
+            <f:form cssClass="col-md-8 col-sm-12 mx-auto"
+                    action="${currentUrl}"
+                    method="post"
+                    modelAttribute="reviewDto"
+            >
+                <div class="mb-3 row">
+                    <f:label path="description" class="col-sm-2 col-form-label">Description</f:label>
+                    <div class="col-sm-10">
+                        <f:textarea cssClass="form-control" path="description"/>
+                        <f:errors path="description" cssClass="invalid-feedback"/>
+                    </div>
+                </div>
+                <div class="my-3 row">
+                    <f:label path="rating" class="col-sm-2 col-form-label">Note</f:label>
+                    <div class="col-sm-10">
+                        <f:input type="number" step="0.5" cssClass="form-control" path="rating"/>
+                        <f:errors path="rating" cssClass="invalid-feedback"/>
+                    </div>
+                </div>
+                <f:button type="submit" class="btn btn-success">
+                    <i class="fa fa-check"></i> Ajouter
+                </f:button>
+            </f:form>
+        </div>
+        <c:if test="${pageReviews.content.size() > 0}">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <!-- Label à afficher -->
+                    <c:set var="label" scope="request" value="Date"/>
+                    <!-- Sur quelle propriété de l'objet on souhaite trier -->
+                    <c:set var="sortable" value="createdAt"/>
+                    <%@ include file="../component/sortable.jsp" %>
+
+                    <c:set var="label" scope="request" value="Note"/>
+                    <c:set var="sortable" value="rating"/>
+                    <%@ include file="../component/sortable.jsp" %>
+
+                    <c:set var="label" scope="request" value="Joueur"/>
+                    <c:set var="sortable" value="gamer.nickname"/>
+                    <%@ include file="../component/sortable.jsp" %>
+
+                    <%@ include file="../component/filter-reset.jsp" %>
+                </div>
+
+                <c:set var="page" scope="request" value="${pageReviews}"/>
+                <%@ include file="../component/pagination-number.jsp" %>
+            </div>
+            <%@ include file="../component/pagination.jsp" %>
             <div class="row">
-                <c:set value="12" scope="request" var="max"/>
-                <c:if test="${game.reviews.size() <= 12}">
-                    <c:set value="${game.reviews.size()}" scope="request" var="max"/>
-                </c:if>
-                <c:forEach items="${game.reviews.subList(0, max)}" var="review">
-                    <div class="col-3">
-                        <div>${review.rating}/5</div>
+                <c:forEach items="${pageReviews.content}" var="review">
+                    <div class="col-12">
+                        <%@ include file="../component/entity/review-card.jsp" %>
                     </div>
                 </c:forEach>
             </div>
+            <%@ include file="../component/pagination.jsp" %>
         </c:if>
-        <f:form modelAttribute="reviewDto" method="post" action="${s:mvcUrl('AppReview#create').arg(0, game.slug).build()}" cssClass="p-5 col-lg-6 col-md-8 col-sm-12 mx-auto">
-            <div class="mb-3 row">
-                <f:label path="title" class="col-sm-2 col-form-label">Title</f:label>
-                <div class="col-sm-10">
-                    <f:input type="text" cssClass="form-control" path="title"/>
-                    <f:errors path="title" cssClass="invalid-feedback"/>
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <f:label path="content" class="col-sm-2 col-form-label">Content</f:label>
-                <div class="col-sm-10">
-                    <f:textarea cssClass="form-control review-content" path="content"/>
-                    <f:errors path="content" cssClass="invalid-feedback"/>
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <f:label path="rating" class="col-sm-2 col-form-label">Rating</f:label>
-                <div class="col-sm-10">
-                    <f:input type="number" min="0" max="5" step="0.5" cssClass="form-control" path="rating"/>
-                    <f:errors path="rating" cssClass="invalid-feedback"/>
-                </div>
-            </div>
-            <f:input type="number" path="userId" hidden="hidden"/>
-            <f:input type="number" path="gameId" hidden="hidden"/>
-            <f:button class="btn btn-secondary" type="reset">Reset</f:button>
-            <f:button class="btn btn-primary">Submit</f:button>
-        </f:form>
-
+    </div>
 </div>
+
+<%@ include file="../footer.jsp" %>

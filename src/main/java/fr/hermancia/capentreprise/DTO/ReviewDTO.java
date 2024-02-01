@@ -20,6 +20,8 @@ public class ReviewDTO {
     @NotBlank
     private String content;
 
+    private String description;
+
     //    @Positive(message = "The user id has to be positive")
     @NotNull(message = "Un identifiant de jeu est requis")
     private Long gameId;

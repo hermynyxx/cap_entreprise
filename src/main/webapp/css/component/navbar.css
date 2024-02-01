@@ -1,24 +1,59 @@
-.navbar{
-    background-color:black;
-    /* Color of the links AFTER scroll */
-         .navbar-scrolled .nav-link,
-         .navbar-scrolled .navbar-toggler-icon,
-         .navbar-scrolled .navbar-brand {
-           color: #fff;
-         }
-         .navbar-nav .nav-item .nav-link:hover {
-           color: orange;
-         }
+.custom-link {
+  color: #fff;
+}
 
-    /* Color of the links AFTER scroll */
-    .navbar-scroll,
-        .navbar-scrolled {
-          background-color: #cbbcb1;
-        }
-        .navbar-brand {
-          font-size: 1.75rem;
-          letter-spacing: 5px;
-        }
+.dropdown-menu{
+    z-index:2;
+
+    }
+
+
+a.dropdown-item:hover {
+    color:orange;
+    --bs-btn-active-color: orange;
+    --bs-dropdown-link-active-bg: #343a40;
+    }
+
+button.dropdown-item:hover {
+    color:orange;
+        --bs-dropdown-link-active-bg: #343a40;
+
+    }
+
+.mask-custom {
+       backdrop-filter: blur(0.2px);
+       background-color: rgba(255, 255, 255, .15);
+     }
+
+ /* Color of the links BEFORE scroll */
+     .navbar-scroll .nav-link,
+     .navbar-scroll .navbar-toggler-icon,
+     .navbar-scroll .navbar-brand {
+       color: #fff;
+     }
+
+.navbar {
+ z-index: 999999;
+}
+/* Color of the links AFTER scroll */
+     .navbar-scrolled .nav-link,
+     .navbar-scrolled .navbar-toggler-icon,
+     .navbar-scrolled .navbar-brand {
+       color: #fff;
+     }
+     .navbar-nav .nav-item .nav-link:hover {
+       color: orange;
+     }
+
+/* Color of the links AFTER scroll */
+.navbar-scroll,
+    .navbar-scrolled {
+      background-color: #cbbcb1;
+    }
+    .navbar-brand {
+      font-size: 1.75rem;
+      letter-spacing: 5px;
+    }
 
     .btn-outline-success {
          --bs-btn-color: orange;
@@ -36,4 +71,3 @@
          --bs-btn-disabled-border-color: orange;
          --bs-gradient: none;
     }
-}

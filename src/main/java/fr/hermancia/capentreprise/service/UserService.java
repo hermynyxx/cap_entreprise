@@ -89,7 +89,7 @@ public class UserService
 
     public User edit(Long id, RegistrationUserDTO userPutDTO) {
         Optional<User> optionalUser = userRepository.findById(id);
-        optionalUser.orElseThrow(() -> new EntityNotFoundException("Lélément n'a pas été trouvé."));
+        optionalUser.orElseThrow(() -> new EntityNotFoundException("L'élément n'a pas été trouvé."));
         User user = optionalUser.get();
         return handleEdit(user, userPutDTO);
     }
@@ -107,7 +107,7 @@ public class UserService
 
 
 
-    public User findByNickname(String nickname) {
+     public User findByNickname(String nickname) {
         return userRepository.findByNickname(nickname).orElseThrow(EntityNotFoundException::new);
     }
 

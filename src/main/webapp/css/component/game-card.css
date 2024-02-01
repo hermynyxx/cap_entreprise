@@ -1,20 +1,27 @@
+
 .card-img-top {
    height: 20em;
-   width : auto;
+   width : 100%;
    object-fit:cover;
 
 }
 
-.card-index {
+.index-jeu {
+    margin-top: 40px;
+    padding;20px;
+
+}
+
+.card1 {
         /*padding: 10px;*/
-        height:20em;
+
         transform: scale(1);
         transition: all 1s ease;
-        filter: grayscale(40%);
+        filter: grayscale(60%);
         cursor: pointer;
 }
 
-.card-index:hover{
+.card1:hover{
     transform: scale(1.05);
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
@@ -23,7 +30,7 @@
     filter: grayscale(0%);
 }
 
-a:link {
+/*a:link {
   color: white;
   background-color: transparent;
   text-decoration: none;
@@ -44,3 +51,13 @@ a:hover {
 a:active {
   color: orange;
   background-color: transparent;
+
+}
+
+.b {
+     white-space: nowrap;
+      width: 12rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+}*/
+
