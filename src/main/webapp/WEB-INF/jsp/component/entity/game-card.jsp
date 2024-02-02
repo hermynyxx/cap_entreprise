@@ -1,20 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 
-<a class="col-md-4 mt-3 main-game-card" href="${UrlRoute.URL_GAME}/${game.slug}">
+<a class=" mt-3 main-game-card" href="${UrlRoute.URL_GAME}/${game.slug}">
 
-  <div class="col">
-    <div class="card h-100">
-  <img img-fluid src="${game.image}" class="card-img-top" alt="${game.name}">
-      <div class="card-body text-bg-light">
-        <h5 class="card-title">${game.name}</h5>
-        <p class="card-text">${game.publisher.name}</p>
-        <p class="card-text">${game.genre.name}</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Sorti le ${dateUtils.getDateFormat(game.publishedAt, "dd/MM/yyyy")}</small></p></small>
-      </div>
+
+
+
+    <div class="col">
+        <div class="card">
+            <img img-fluid src="${game.image}" class="card-img-top" alt="${game.name}">
+            <div class="card-body">
+                <h6 class="card-title b">${game.name}</h6>
+                <p class="card-text b">${game.publisher.name}</p>
+                <p class="card-text b">${game.genre.name}</p>
+                <small class="text-muted">Sorti le ${dateUtils.getDateFormat(game.publishedAt, "dd/MM/yyyy")}</small></p></small>
+            </div>
+        </div>
     </div>
-  </div>
-
 </a>
