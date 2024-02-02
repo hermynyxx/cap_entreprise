@@ -13,10 +13,10 @@
         </ol>
     </nav>
     <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12 bg-light">
             <div class="container-img p-3">
                 <img alt="${game.name}" src="${game.image}">
-                <a href="${UrlRoute.URL_GAME_UPLOAD_IMAGE}/${game.slug}" class="btn btn-link text-decoration-none text-warning">
+                <a href="${UrlRoute.URL_GAME_UPLOAD_IMAGE}/${game.slug}" class="btn btn-link pt-5 text-decoration-none text-warning">
                                 <i class="fa-solid fa-file-excel me-1"></i>
                                 Télécharger une image
                             </a>
@@ -45,22 +45,23 @@
         </div>
     </div>
 
-    TML
 
 
 
 
-    <h2 class="my-5">Description</h2>
 
-    <div class="text-center description">
+            <h2 class="text-start fw-bolder fst-italic text-start my-5 pt-5">DESCRIPTION</h2>
+
+    <div class="text-start description">
         <c:out value="${game.description}" escapeXml="false"/>
     </div>
 
     <div id="game-reviews"
          class="my-5"
     >
-        <h1>
-            Commentaires
+                <h2 class="text-start fw-bolder fst-italic text-start my-5">
+
+            COMMENTAIRES
             <button class="ms-2 btn btn-link"
                     title="Ajouter un commentaire"
                     data-hide-show-button="formReview"

@@ -24,11 +24,22 @@
     object-fit:cover;
     opacity: 0.8;
 }
+.background-image-page3 {
+    left: 2%;
+    top:3%;
+    object-fit:cover;
+    opacity: 0.8;
+}
 
 .section-video{
     height: 100%;
     width: 100%;
     position: relative;
+}
+
+select.opt option:hover {
+    box-shadow: 0 0 10 px 100px #1882A8 inset;
+
 }
 
 .section-carousel{

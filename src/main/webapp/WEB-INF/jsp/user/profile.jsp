@@ -14,16 +14,18 @@
         </ol>
     </nav>
 
+
+<div class= "container p-4 border profile-container" style = "height:300px;">
     <img class ="rounded-circle" src="https://img.freepik.com/photos-gratuite/portrait-belle-jeune-femme-coiffure-elegante-lunettes_1142-40217.jpg?w=740&t=st=1706786934~exp=1706787534~hmac=b6fc1dc732b60dbd5d252ae03ec0aa05cc1412f7d95b92d872ebc380ce45b545" alt="logo" id="logo" style="width:90px; height:90px">
     <h1>${user.nickname}</h1>
     <c:if test="${!user.moderator}">
         <p>${dateUtils.getAgeFromDate(user.birthAt)} ans</p>
     </c:if>
-
+</div>
     <div id="user-reviews"
          class="my-5"
     >
-        <h2> Tes commentaires</h2>
+        <h2 class = "text-end fw-bolder fst-italic text-start my-5"> TES COMMENTAIRES</h2>
         <c:if test="${pageReviews.content.size() > 0}">
         <div class ="row ">
     <div class="d-flex justify-content-between index-jeu bg-secondary  bg-dark bg-gradient shadow-sm mb-5  rounded pb-3" style ="color:orange;">
@@ -59,4 +61,3 @@
 </div>
 </div>
 
-<%@ include file="../footer.jsp" %>
