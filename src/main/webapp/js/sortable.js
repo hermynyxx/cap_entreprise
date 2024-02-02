@@ -13,21 +13,20 @@ function initSortable() {
 }
 
 function initSortableSelect() {
-    const selects = document.querySelectorAll('.sortable-select')
-    selects.forEach((select) => {
-        select.addEventListener('change', () => {
-            const selectedOption = select.querySelector('option:checked');
-            if (selectedOption) {
-                window.location.href = selectedOption.getAttribute('data-filter-url');
+    const btn = document.querySelector("[btn-selector]");
+        if(btn){
+            var url = new URL(location.href);
+            const parameter = url.searchParams.get("sort");
+            console.log(parameter);
+            if(parameter){
+                if(parameter==="moderator,asc"){
+                    btn.innerHTML = "Non modérés";
+                }
+                if(parameter==="moderator,desc"){
+                    btn.innerHTML = "Modérés";
+                }
             }
-        });
-        const options = select.querySelectorAll('option');
-        options.forEach((option) => {
-            if (window.location.search.includes(option.value)) {
-                option.setAttribute('selected', 'selected');
-            }
-        });
-    });
+        }
 }
 
 window.addEventListener('load', () => {

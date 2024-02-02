@@ -45,21 +45,17 @@
 
             <security:authorize access="hasRole('MODERATOR')">
                 <div class="sort-filter mt-4 me-3">
-                <select class="form-select sortable-select">
-                    <option value="all" data-filter-url="${currentUrl}">
-                        Tous les commentaires
-                    </option>
-                    <option value="sort=moderator,desc"
-                            data-filter-url="${jspUtils.generateUrlFrom(currentUrl, currentQuery, "sort=moderator,desc")}"
-                    >
-                        Modérés
-                    </option>
-                    <option value="sort=moderator,asc"
-                            data-filter-url="${jspUtils.generateUrlFrom(currentUrl, currentQuery, "sort=moderator,asc")}"
-                    >
-                        À modérer
-                    </option>
-                </select>
+
+                <div class="dropdown">
+                                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" btn-selector>
+                                        Tous les commentaires
+                                      </button>
+                                      <ul class="dropdown-menu dropdown-menu-dark ">
+                                        <li><a class="dropdown-item text-warning" href="/avis" moderationFilter>Tous les commentaires</a></li>
+                                        <li><a class="dropdown-item text-bg-dark" href="${jspUtils.generateUrlFrom(currentUrl, currentQuery, "sort=moderator,asc")}" moderationFilter>Non modérés</a></li>
+                                        <li><a class="dropdown-item text-bg-dark" href="${jspUtils.generateUrlFrom(currentUrl, currentQuery, "sort=moderator,desc")}" moderationFilter>Modérés</a></li>
+                                      </ul>
+                                    </div>
             </div>
             </security:authorize>
 
