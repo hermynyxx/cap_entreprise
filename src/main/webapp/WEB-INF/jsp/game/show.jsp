@@ -16,6 +16,10 @@
         <div class="col-md-6 col-sm-12">
             <div class="container-img p-3">
                 <img alt="${game.name}" src="${game.image}">
+                <a href="${UrlRoute.URL_GAME_UPLOAD_IMAGE}/${game.slug}" class="btn btn-link text-decoration-none text-warning">
+                                <i class="fa-solid fa-file-excel me-1"></i>
+                                Télécharger une image
+                            </a>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">

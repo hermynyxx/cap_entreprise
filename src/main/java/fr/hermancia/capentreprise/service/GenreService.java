@@ -26,4 +26,9 @@ public class GenreService
         return genreRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
     }
+
+    public List<Genre> findAllSorted() {
+        return genreRepository.findAllByOrderByNameAsc();
+    }
+
 }

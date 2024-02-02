@@ -4,8 +4,11 @@ import fr.hermancia.capentreprise.entity.Moderator;
 import fr.hermancia.capentreprise.mapping.UrlRoute;
 import fr.hermancia.capentreprise.service.ReviewService;
 import fr.hermancia.capentreprise.service.UserService;
+import fr.hermancia.capentreprise.utils.ExcelReviewService;
 import fr.hermancia.capentreprise.utils.FlashMessage;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -16,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.Principal;
 
 @Controller
@@ -25,6 +33,7 @@ public class ReviewController {
 
     private ReviewService reviewService;
     private UserService userService;
+    private ExcelReviewService excelService;
 
     @GetMapping(value = UrlRoute.URL_REVIEW)
     public ModelAndView list(
@@ -69,5 +78,19 @@ public class ReviewController {
         return modelAndView;
     }
 
-
+    @GetMapping(UrlRoute.URL_EXPORT)
+    public void downloadExcel(HttpServletResponse response) {
+        try {
+            File file = excelService.writeExcel();
+            ByteArrayInputStream excelToByte = new ByteArrayInputStream(
+                    Files.readAllBytes(Paths.get(file.getAbsolutePath()))
+            );
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
+            IOUtils.copy(excelToByte, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

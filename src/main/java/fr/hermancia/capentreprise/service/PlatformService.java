@@ -1,5 +1,6 @@
 package fr.hermancia.capentreprise.service;
 
+import fr.hermancia.capentreprise.entity.BusinessModel;
 import fr.hermancia.capentreprise.entity.Platform;
 import fr.hermancia.capentreprise.repository.PlatformRepository;
 import fr.hermancia.capentreprise.service.interfaces.DAOEntityInterface;
@@ -25,5 +26,9 @@ public class PlatformService implements
     public Platform findById(Long id) {
         return platformRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<Platform> findAllSorted() {
+        return platformRepository.findAllByOrderByNameAsc();
     }
 }

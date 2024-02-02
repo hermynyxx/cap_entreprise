@@ -23,9 +23,18 @@ public class UrlRoute {
 
     public final static String URL_USER = "/user";
 
+    public final static String URL_REVIEW_MODERATE_PATH = URL_REVIEW_MODERATE + "/{id}/{moderate}";
+    public final static String URL_REVIEW_ID = URL_REVIEW + "/avis/{id}";
 
 
-
+    public final static String URL_GAME_UPLOAD_IMAGE = URL_GAME + "/upload-image";
+    public final static String URL_GAME_UPLOAD_IMAGE_PATH = URL_GAME + "/upload-image/{slug}";
 
 }
+
+
+
+
+
+
 

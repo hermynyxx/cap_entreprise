@@ -1,6 +1,7 @@
 package fr.hermancia.capentreprise.service;
 
 import fr.hermancia.capentreprise.entity.BusinessModel;
+import fr.hermancia.capentreprise.entity.Genre;
 import fr.hermancia.capentreprise.repository.BusinessModelRepository;
 import fr.hermancia.capentreprise.service.interfaces.DAOEntityInterface;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,4 +29,7 @@ public class BusinessModelService
                 .orElseThrow(EntityNotFoundException::new);
     }
 
+    public List<BusinessModel> findAllSorted() {
+        return businessModelRepository.findAllByOrderByNameAsc();
+    }
 }
