@@ -18,7 +18,7 @@
             NOS JEUX A LA UNE
                 <security:authorize access="hasRole('MODERATOR')">
                 <a href="${UrlRoute.URL_GAME_NEW}" class="ms-2">
-                    <i class="fa fa-circle-plus link-green"></i>
+                    <i class="fa fa-circle-plus link-green text-warning"></i>
                 </a>
                 </security:authorize>
     </h1>
@@ -32,10 +32,7 @@
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="${contextPath}/css/asset/perso1.png"  class="d-block w-100"  alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="${contextPath}/css/asset/perso2.png" class="d-block w-100" alt="...">
+      <img src="${contextPath}/css/asset/perso2.png"  class="d-block w-75"  alt="...">
     </div>
     <div class="carousel-item">
       <img src="${contextPath}/css/asset/perso3.png" class="d-block w-75" alt="...">
@@ -44,7 +41,7 @@
       <img src="${contextPath}/css/asset/perso4.png" class="d-block w-75" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="${contextPath}/css/asset/perso5.png" class="d-block w-100" alt="...">
+      <img src="${contextPath}/css/asset/perso5.png" class="d-block w-75" alt="...">
     </div>
     <div class="carousel-item">
       <img src="${contextPath}/css/asset/perso6.png" class="d-block w-75" alt="...">

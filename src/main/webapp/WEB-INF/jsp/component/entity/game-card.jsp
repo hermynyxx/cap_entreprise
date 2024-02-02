@@ -7,9 +7,9 @@
 
 
     <div class="col">
-        <div class="card">
+        <div class="card  card1">
             <img img-fluid src="${game.image}" class="card-img-top" alt="${game.name}">
-            <div class="card-body">
+            <div class="card-body bg-light bg-gradient">
                 <h6 class="card-title b">${game.name}</h6>
                 <p class="card-text b">${game.publisher.name}</p>
                 <p class="card-text b">${game.genre.name}</p>
