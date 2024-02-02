@@ -1,6 +1,6 @@
 
 .card-img-top {
-   height: 20em;
+   height: 21em;
    width : 100%;
    object-fit:cover;
 
@@ -26,18 +26,21 @@
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
-
+    border-radius: 45px;
+     background: #d9a081;
+     box-shadow:  7px 7px 23px #a1765f,
+                  -7px -7px 23px #ffcaa3;
     filter: grayscale(0%);
 }
 
-/*a:link {
-  color: white;
+a:link {
+  color:grey;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: whiteSmoke;
+  color: velvet;
   background-color: transparent;
   text-decoration: none;
 }
@@ -59,5 +62,5 @@ a:active {
       width: 12rem;
       overflow: hidden;
       text-overflow: ellipsis;
-}*/
+
 

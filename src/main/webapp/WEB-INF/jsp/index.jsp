@@ -3,11 +3,11 @@
 <c:set var="title" scope="request" value="Avis"/>
 <jsp:include flush="true" page="${contextPath}/WEB-INF/jsp/base.jsp"/>
 
-<div class="background-container2 background-image-page d-none d-sm-block d-lg-block ">
-    <img src="${contextPath}/css/asset/pikachu.png" class:"img-fluid img-cover"alt="pikachu" id="pikachu" style="width:500px; height 500px">
+<div class="background-container background-image-page2 d-none d-sm-block d-lg-block ">
+    <img src="${contextPath}/css/asset/pikachu_nuit-PhotoRoom.png-PhotoRoom.png" class:"img-fluid img-cover"alt="pikachu" id="pikachu" style="width:500px; height 500px">
 </div>
 <div class = "container container-game">
-        <h1 class="text-center fw-bolder fst-italic text-start my-5">
+        <h1 class="text-end fw-bolder fst-italic text-start my-5">
         LES AVIS DE NOS JOUEURS
  </h1>
     <hr>
@@ -26,20 +26,20 @@
 
         <div class="d-flex">
             <!-- Label à afficher -->
-            <c:set var="label" scope="request" value="Date"/>
+            <c:set var="label" scope="request" value="DATE"/>
             <!-- Sur quelle propriété de l'objet on souhaite trier -->
             <c:set var="sortable" value="createdAt"/>
             <%@ include file="component/sortable.jsp" %>
 
-            <c:set var="label" scope="request" value="Note"/>
+            <c:set var="label" scope="request" value="NOTE"/>
             <c:set var="sortable" value="rating"/>
             <%@ include file="component/sortable.jsp" %>
 
-            <c:set var="label" scope="request" value="Jeu"/>
+            <c:set var="label" scope="request" value="JEU"/>
             <c:set var="sortable" value="game.name"/>
             <%@ include file="component/sortable.jsp" %>
 
-            <c:set var="label" scope="request" value="Joueur"/>
+            <c:set var="label" scope="request" value="JOUEUR"/>
             <c:set var="sortable" value="gamer.nickname"/>
             <%@ include file="component/sortable.jsp" %>
 
@@ -79,7 +79,7 @@
     </div>
     <security:authorize access="hasRole('MODERATOR')">
         <div>
-            <a href="${UrlRoute.URL_EXPORT}" class="btn btn-link">
+            <a href="${UrlRoute.URL_EXPORT}" class="btn btn-link text-decoration-none text-warning">
                 <i class="fa-solid fa-file-excel me-1"></i>
                 Télécharger export Excel
             </a>
