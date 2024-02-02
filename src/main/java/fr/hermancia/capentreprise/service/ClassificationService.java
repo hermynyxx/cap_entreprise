@@ -1,5 +1,6 @@
 package fr.hermancia.capentreprise.service;
 
+import fr.hermancia.capentreprise.entity.BusinessModel;
 import fr.hermancia.capentreprise.entity.Classification;
 import fr.hermancia.capentreprise.repository.ClassificationRepository;
 import fr.hermancia.capentreprise.service.interfaces.DAOEntityInterface;
@@ -28,4 +29,9 @@ public class ClassificationService
         return classificationRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
     }
+
+    public List<Classification> findAllSorted() {
+        return classificationRepository.findAllByOrderByNameAsc();
+    }
+
 }

@@ -1,5 +1,6 @@
 package fr.hermancia.capentreprise.service;
 
+import fr.hermancia.capentreprise.entity.BusinessModel;
 import fr.hermancia.capentreprise.entity.Publisher;
 import fr.hermancia.capentreprise.repository.PublisherRepository;
 import fr.hermancia.capentreprise.service.interfaces.DAOEntityInterface;
@@ -25,5 +26,9 @@ public class PublisherService
     public Publisher findById(Long id) {
         return publisherRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<Publisher> findAllSorted() {
+        return publisherRepository.findAllByOrderByNameAsc();
     }
 }
