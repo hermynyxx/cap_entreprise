@@ -31,7 +31,7 @@ public class GameController {
     public ModelAndView index(
             ModelAndView mav,
             @PageableDefault(
-                    size = 6, // nb Element par page
+                    size = 8, // nb Element par page
                     sort = { "publishedAt" }, // order by
                     direction = Sort.Direction.DESC
             ) Pageable pageable
@@ -48,7 +48,7 @@ public class GameController {
             Principal principal,
             @ModelAttribute("flashMessage") FlashMessage flashMessage,
             @PageableDefault(
-                    size = 6, // nb Element par page
+                    size = 8, // nb Element par page
                     sort = { "createdAt" }, // order by
                     direction = Sort.Direction.DESC
             ) Pageable pageable

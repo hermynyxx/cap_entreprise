@@ -14,6 +14,9 @@ padding:50px;
     object-fit: cover;
 }
 
+.container-games{
+    margin-top:100px;
+}
 
 .img-cover{
     object-fit: cover;
@@ -24,6 +27,14 @@ padding:50px;
 .container-game{
 background-repeat: no-repeat;
 background-size:cover;
+
+}
+
+.b{
+     white-space: nowrap;
+      width: 10.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
 }
 

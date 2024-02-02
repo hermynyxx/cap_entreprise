@@ -3,11 +3,17 @@
 <c:set var="title" scope="request" value="Avis"/>
 <jsp:include flush="true" page="${contextPath}/WEB-INF/jsp/base.jsp"/>
 
-<div class="background-container background-image-page d-none d-sm-block d-lg-block ">
+<div class="background-container2 background-image-page d-none d-sm-block d-lg-block ">
     <img src="${contextPath}/css/asset/pikachu.png" class:"img-fluid img-cover"alt="pikachu" id="pikachu" style="width:500px; height 500px">
 </div>
-
+<div class = "container container-game">
+        <h1 class="text-center fw-bolder fst-italic text-start my-5">
+        LES AVIS DE NOS JOUEURS
+ </h1>
+    <hr>
+</div>
 <div class="container mt-5 first-container-review" style="background-image:url('')">
+
 <div class="container mt-5 p-5 ">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -15,8 +21,9 @@
             <li class="breadcrumb-item"><a class="btn-link" href="${contextPath}${UrlRoute.URL_GAME}">Les jeux</a></li>
         </ol>
     </nav>
+    <div class ="row ">
+    <div class="d-flex justify-content-between index-jeu bg-secondary  bg-dark bg-gradient shadow-sm mb-5  rounded pb-3" style ="color:orange;">
 
-    <div class="d-flex justify-content-between">
         <div class="d-flex">
             <!-- Label à afficher -->
             <c:set var="label" scope="request" value="Date"/>
@@ -62,7 +69,7 @@
         <c:set var="page" scope="request" value="${reviewsList}"/>
         <%@ include file="component/pagination-number.jsp" %>
     </div>
-
+</div>
     <div class="container container-card-review">
         <c:forEach items="${reviewsList.content}" var="review">
             <div class="col s-6 col-review">
